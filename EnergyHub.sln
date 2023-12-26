@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{B2CEEE73-A794-4284-8563-75C7C29A5A45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyHub.Application", "EnergyHub.Application\EnergyHub.Application.csproj", "{C3475D66-6A2F-4F36-A308-77A6D671B659}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{B50F0529-B78E-45AD-B5F0-ACF096CA474A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyHub.Domain", "EnergyHub.Domain\EnergyHub.Domain.csproj", "{808F2BA2-238D-4499-A4D5-FD27137C8F44}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{C0AE1430-7A9B-4B1A-BB2B-85B661E4F165}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyHub.Infrastructure", "EnergyHub.Infrastructure\EnergyHub.Infrastructure.csproj", "{DD614899-109C-469D-BA79-2CAB41A3DBE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{1B34D8ED-88B6-4118-B2D6-C545592D240C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyHub.API", "EnergyHub.API\EnergyHub.API.csproj", "{274630DF-B923-48E5-82F5-1585B2AFEE2F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3475D66-6A2F-4F36-A308-77A6D671B659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3475D66-6A2F-4F36-A308-77A6D671B659}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3475D66-6A2F-4F36-A308-77A6D671B659}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3475D66-6A2F-4F36-A308-77A6D671B659}.Release|Any CPU.Build.0 = Release|Any CPU
+		{808F2BA2-238D-4499-A4D5-FD27137C8F44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{808F2BA2-238D-4499-A4D5-FD27137C8F44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{808F2BA2-238D-4499-A4D5-FD27137C8F44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{808F2BA2-238D-4499-A4D5-FD27137C8F44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD614899-109C-469D-BA79-2CAB41A3DBE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD614899-109C-469D-BA79-2CAB41A3DBE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD614899-109C-469D-BA79-2CAB41A3DBE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD614899-109C-469D-BA79-2CAB41A3DBE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{274630DF-B923-48E5-82F5-1585B2AFEE2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{274630DF-B923-48E5-82F5-1585B2AFEE2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{274630DF-B923-48E5-82F5-1585B2AFEE2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{274630DF-B923-48E5-82F5-1585B2AFEE2F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C3475D66-6A2F-4F36-A308-77A6D671B659} = {B2CEEE73-A794-4284-8563-75C7C29A5A45}
+		{808F2BA2-238D-4499-A4D5-FD27137C8F44} = {B50F0529-B78E-45AD-B5F0-ACF096CA474A}
+		{DD614899-109C-469D-BA79-2CAB41A3DBE9} = {C0AE1430-7A9B-4B1A-BB2B-85B661E4F165}
+		{274630DF-B923-48E5-82F5-1585B2AFEE2F} = {1B34D8ED-88B6-4118-B2D6-C545592D240C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2E804E7-F5AE-4B78-9BCA-9926ECA96F48}
+	EndGlobalSection
+EndGlobal
