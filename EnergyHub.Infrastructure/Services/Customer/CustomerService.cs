@@ -40,9 +40,9 @@ namespace EnergyHub.Infrastructure.Services.Customer
             return result;
         }
 
-        public async Task<bool> UpdateTokenInfo(AuthenticationResponse response, Guid Id)
+        public async Task<bool> UpdateTokenInfo(AuthenticationResponse response, Guid Id, bool FirstToken)
         {
-            var result = await _customerRepository.UpdateCustomerTokenAsync(response,Id);
+            var result = await _customerRepository.UpdateCustomerTokenAsync(response,Id,FirstToken);
             return result;
         }
     }

@@ -13,6 +13,6 @@ namespace EnergyHub.Application.Services.Customer
         public Task<EnergyHub.Domain.Entities.Customer.Customer> GetCustomerAsync(Guid Id);
         public Task<List<EnergyHub.Domain.Entities.Customer.Customer>> GetCustomerListAsync();
 
-        public Task<bool> UpdateTokenInfo(AuthenticationResponse response, Guid Id);
+        public Task<bool> UpdateTokenInfo(AuthenticationResponse response, Guid Id,bool FirstToken);
     }
 }

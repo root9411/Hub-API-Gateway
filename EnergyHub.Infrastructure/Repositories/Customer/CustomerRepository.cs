@@ -39,17 +39,28 @@ namespace EnergyHub.Infrastructure.Repositories.Customer
             return await result.ToListAsync();
         }
 
-        public async Task<bool> UpdateCustomerTokenAsync(AuthenticationResponse response , Guid Id)
+        public async Task<bool> UpdateCustomerTokenAsync(AuthenticationResponse response , Guid Id, bool FirstToken)
         {
             var data = await GetCustomerAsync(Id);
             if (data != null)
             {
-                data.RefreshToken = response.RefreshToken;
-                data.accessTokenExpirationTime = response.accessTokenExpirationTime;
 
-                await _energyHubDbContext.SaveToDbAsync();
+                if(FirstToken)
+                {
+                    data.RefreshToken = response.RefreshToken;
+                    data.accessTokenExpirationTime = response.accessTokenExpirationTime;
 
-                return true;
+                    await _energyHubDbContext.SaveToDbAsync();
+
+                    return true;
+                }
+                else
+                {
+                    data.RefreshToken = response.RefreshToken;
+                    await _energyHubDbContext.SaveToDbAsync();
+                    return true;
+                }
+                
             }
 
             return false;

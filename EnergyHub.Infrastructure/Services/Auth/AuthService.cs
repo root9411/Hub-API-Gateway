@@ -34,7 +34,7 @@ namespace EnergyHub.Infrastructure.Services.Auth
         public async Task<AuthenticationResponse> GetAccessToken(Guid Id,Claim[] claims)
         {
             var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
-            var accessTokenExpirationTime = DateTime.UtcNow.AddMinutes(1);
+            var accessTokenExpirationTime = DateTime.UtcNow.AddMinutes(5);
             var jwtSecurityToken = new JwtSecurityToken(
                     claims: claims,
                     expires: accessTokenExpirationTime,
@@ -46,26 +46,16 @@ namespace EnergyHub.Infrastructure.Services.Auth
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             var refreshToken = RefreshTokenGenerator();
 
-            //_context.Response.Cookies.Append(ClientId, refreshToken, new CookieOptions
-            //{
-            //    Expires = DateTime.Now.AddHours(1),
-            //    Secure = true, 
-            //    HttpOnly = true, 
-            //    SameSite = SameSiteMode.Strict 
-            //});
-
-
-
             AuthenticationResponse TokenInfo = new AuthenticationResponse()
             {
                 accessToken = jwtToken,
                 RefreshToken = refreshToken,
-                accessTokenExpirationTime = accessTokenExpirationTime,
             };
 
+            var FirstToken = false;
 
 
-            var result = await _customerService.UpdateTokenInfo(TokenInfo, Id);
+            var result = await _customerService.UpdateTokenInfo(TokenInfo, Id, FirstToken);
 
             if (result)
             {
@@ -107,7 +97,7 @@ namespace EnergyHub.Infrastructure.Services.Auth
                                 //new Claim(JwtRegisteredClaimNames.Email, user.ClientId.ToString()),
                             });
 
-                            var accessTokenExpirationTime = DateTime.UtcNow.AddMinutes(1);
+                            var accessTokenExpirationTime = DateTime.UtcNow.AddMinutes(5);
 
                             var tokenDescriptor = new SecurityTokenDescriptor
                             {
@@ -123,17 +113,19 @@ namespace EnergyHub.Infrastructure.Services.Auth
                             var jwtToken = tokenHandler.WriteToken(token);
 
                             var refreshToken = RefreshTokenGenerator();
+                            var refreshTokenExpire = DateTime.UtcNow.AddDays(9);  // refresh Token Expire
 
 
                             AuthenticationResponse TokenInfo = new AuthenticationResponse() { 
                                 accessToken = jwtToken,
                                 RefreshToken = refreshToken,
-                                accessTokenExpirationTime = accessTokenExpirationTime,
+                                accessTokenExpirationTime = refreshTokenExpire,
                             };
 
+                            var FirstToken = true;
 
 
-                            var result = await _customerService.UpdateTokenInfo(TokenInfo, item.Id);
+                            var result = await _customerService.UpdateTokenInfo(TokenInfo, item.Id,FirstToken);
                             if (result)
                             {
                                 return TokenInfo;
@@ -227,8 +219,10 @@ namespace EnergyHub.Infrastructure.Services.Auth
 
 
             var Id = pricipal.Identity.Name;
+            var accessTokenExpirationTime = DateTime.UtcNow.AddMinutes(5);
 
-            if(Guid.TryParse(Id,out Guid ClientData))
+
+            if (Guid.TryParse(Id,out Guid ClientData))
             {
                 var result = _customerService.GetCustomerAsync(ClientData);
 
@@ -237,13 +231,15 @@ namespace EnergyHub.Infrastructure.Services.Auth
                     throw new SecurityTokenException("Invalid token Passed!");
                 }
 
+                if(accessTokenExpirationTime > result.Result.accessTokenExpirationTime)
+                {
+                    throw new SecurityTokenException("Refresh Token Expired Login Again!");
+                }
 
                 return await GetAccessToken(ClientData, pricipal.Claims.ToArray());
 
             }
             
-            //var existingToken = _context.Request.Cookies[ClientId];
-
 
             throw new SecurityTokenException("Invalid Token Claims!");
 

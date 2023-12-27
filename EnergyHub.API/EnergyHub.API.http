@@ -1,0 +1,19 @@
+﻿@EnergyHub.API_HostAddress = https://localhost:44376
+
+POST {{EnergyHub.API_HostAddress}}/authentication/SignIn
+Content-Type: application/json
+
+{
+  //LoginDetail
+}
+
+###
+
+POST {{EnergyHub.API_HostAddress}}/authentication/SignIn
+Content-Type: application/json
+
+{
+  //LoginDetail
+}
+
+###

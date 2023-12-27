@@ -8,7 +8,7 @@ namespace EnergyHub.Domain.Repositories
         public Task<Customer> AddCustomerAsync(Customer customer);
         public Task<Customer> GetCustomerAsync(Guid Id);
         public Task<List<Customer>> GetCustomerListAsync();
-        public Task<bool> UpdateCustomerTokenAsync(AuthenticationResponse response, Guid Id);
+        public Task<bool> UpdateCustomerTokenAsync(AuthenticationResponse response, Guid Id,bool FirstToken);
 
     }
 }
