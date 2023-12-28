@@ -14,17 +14,16 @@ namespace EnergyHub.API.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthService _authService;
-        private readonly IHttpContextAccessor _context;
 
-        public AuthenticationController(IAuthService authService, IHttpContextAccessor context)
+        public AuthenticationController(IAuthService authService)
         {
             _authService = authService;
-            _context = context;
         }
 
 
         [AllowAnonymous]
         [HttpPost("SignIn")]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> SignIn([FromBody] LoginDetail user)
         {
             try

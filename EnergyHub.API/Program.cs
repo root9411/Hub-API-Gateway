@@ -1,5 +1,7 @@
 using EnergyHub.API.Controllers;
 using EnergyHub.Application;
+using Microsoft.AspNetCore.Antiforgery;
+using EnergyHub.Application.Common;
 using EnergyHub.Application.Services.Auth;
 using EnergyHub.Infrastructure;
 using EnergyHub.Infrastructure.Services.Auth;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,12 +53,24 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization();
 
+// ANTI FORGERY STARTS
+
 //builder.Services.AddAntiforgery(option =>
 //{
-//    option.FormFieldName = "form";
-//    option.HeaderName = "X-CSRF-TOKEN";
-//    option.SuppressXFrameOptionsHeader = false;
+//    option.HeaderName = "CSRF-TOKEN";
 //});
+
+//builder.Services.AddScoped<AntiforgeryMiddleware>();
+//builder.Services.AddDistributedMemoryCache();
+//builder.Services.AddSession(options =>
+//{
+//    options.IdleTimeout = TimeSpan.FromMinutes(30);
+//    options.Cookie.HttpOnly = true;
+//    options.Cookie.IsEssential = true;
+//});
+
+
+// ANTI FORGERY END
 
 
 builder.Services.AddSwaggerGen(c =>
@@ -90,7 +105,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddHttpContextAccessor();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -111,10 +125,13 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+
+//app.UseSession();
+//app.UseMiddleware<AntiforgeryMiddleware>();
+
 app.UseHttpsRedirection();
 
 app.UseCors(); // Place before other middleware if you want CORS to be processed early
-
 app.UseAuthentication();
 app.UseAuthorization();
 
